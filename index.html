@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel Cleaner - Innovation in Solar Maintenance</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007AFF;
+            --text-primary: #333333;
+            --bg-primary: #ffffff;
+            --sidebar-width: 250px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-active .accordion-content {
+            max-height: 500px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hide elements initially */
+        .animate-trigger {
+            opacity: 0;
+        }
+
+        /* Ensure elements become visible when the animation classes are added */
+        .animate__animated {
+            opacity: 1;
+        }
+
+
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 50;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .btn {
+            @apply px-6 py-3 rounded-lg transition-all duration-300;
+        }
+
+        .btn-primary {
+            @apply bg-blue-600 text-white hover:bg-blue-700;
+        }
+
+        .section-title {
+            @apply text-4xl font-semibold mb-6;
+        }
+        /* Dynamic Slider Animation */
+    .slider-container {
+        display: flex;
+        width: calc(100% * 6); /* Adjust for the number of images */
+    }
+    .animate-slider {
+        animation: slide 30s linear infinite;
+    }
+    @keyframes slide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar bg-gray-900 text-white h-screen fixed top-0 left-0 p-6 flex flex-col">
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="text-xl font-semibold">Solar Cleaner</h2>
+            <button class="md:hidden" id="close-sidebar">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <!-- Wrap the ul in a div with overflow properties -->
+        <div class="overflow-y-auto flex-1">
+            <ul class="space-y-6">
+                <li><a href="#home" class="block hover:text-blue-400 transition-colors">Home</a></li>
+                <li><a href="#introduction" class="block hover:text-blue-400 transition-colors">Introduction</a></li>
+                <li><a href="#need" class="block hover:text-blue-400 transition-colors">Need Analysis</a></li>
+                <li><a href="#future" class="block hover:text-blue-400 transition-colors">Greener Future</a></li>
+                <li><a href="#challenge" class="block hover:text-blue-400 transition-colors">Challenges</a></li>
+                <li><a href="#insights" class="block hover:text-blue-400 transition-colors">Customer Insights</a></li>
+                <li><a href="#seller-review" class="block hover:text-blue-400 transition-colors">Seller Review</a></li>
+                <li><a href="#goals" class="block hover:text-blue-400 transition-colors">Project Goals</a></li>
+                <li><a href="#design-solution" class="block hover:text-blue-400 transition-colors">Design Solution</a></li>
+                <li><a href="#geometric-modeling" class="block hover:text-blue-400 transition-colors">Geometric Modeling</a></li>
+                <li><a href="#engineering-analysis" class="block hover:text-blue-400 transition-colors">Engineering Analysis</a></li>
+                <li><a href="#geometric-design" class="block hover:text-blue-400 transition-colors">Geometric Design</a></li>
+                <li><a href="#material-selection" class="block hover:text-blue-400 transition-colors">Material Selection</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button class="fixed top-4 left-4 z-50 md:hidden bg-gray-900 text-white p-2 rounded-lg" id="open-sidebar">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content min-h-screen">
+        <!-- Hero Section -->
+        <section id="home"
+            class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 p-8">
+            <div class="max-w-4xl mx-auto text-center animate-trigger" data-animation="animate__fadeInDown">
+                <h1 class="text-6xl font-bold text-gray-800 mb-6 animate-trigger" data-animation="animate__fadeInRight">
+                    Revolutionizing Solar Panel Maintenance
+                </h1>
+                
+                <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto animate-trigger"
+                    data-animation="animate__fadeInLeft">
+                    Introducing an innovative, waterless cleaning solution to maximize solar efficiency while preserving
+                    our planet's resources.
+                </p>
+                <div class="text-center mb-8 animate-trigger" data-animation="animate__pulse">
+                    <p class="text-lg font-semibold text-gray-800 mb-4">
+                        <strong>Welcome to our Solar Panel Cleaner Project</strong>
+                </p>
+                    <button class="btn btn-primary rounded-full border-2 border-blue-600 animate__animated animate__bounceIn px-4 py-2">
+                        <svg class="w-6 h-6 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                        Scroll down to learn more
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introduction" class="min-h-screen py-20 px-8 bg-gray-100">
+            <div class="max-w-4xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+                <h2 class="section-title text-center text-3xl font-bold animate-trigger"
+                    data-animation="animate__fadeInRight">
+                    Introduction
+                </h2>
+                <p class="text-lg text-gray-700 mb-8 text-center animate-trigger" data-animation="animate__fadeInLeft">
+                    This capstone project, designated UME793, focuses on developing a <strong>waterless solar panel
+                        cleaning system</strong>. Conducted at the Thapar Institute of Engineering & Technology,
+                    Patiala, India, this project aims to address the growing need for efficient and sustainable solar
+                    panel maintenance.
+                </p>
+
+                <div class="animate-trigger mb-8" data-animation="animate__zoomIn">
+                    <h3 class="text-2xl font-semibold text-gray-800 text-center mb-6">
+                        Project Team
+                    </h3>
+                    <ul class="space-y-4 text-center">
+                        <li class="text-xl font-medium text-gray-600 animate-trigger"
+                            data-animation="animate__fadeInLeft">
+                            <strong>Arpit Singh</strong> (102108005)
+                        </li>
+                        <li class="text-xl font-medium text-gray-600 animate-trigger"
+                            data-animation="animate__fadeInRight">
+                            <strong>Japteshwar Singh</strong> (102108158)
+                        </li>
+                        <li class="text-xl font-medium text-gray-600 animate-trigger"
+                            data-animation="animate__fadeInLeft">
+                            <strong>Milanpreet Singh Chadha</strong> (102108164)
+                        </li>
+                        <li class="text-xl font-medium text-gray-600 animate-trigger"
+                            data-animation="animate__fadeInRight">
+                            <strong>Abhinav</strong> (102108166)
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="animate-trigger" data-animation="animate__fadeInUp">
+                    <p class="text-lg text-gray-700 text-center">
+                        This project is guided by Professors Tarun Kumar Bera and Jay Prakash Tripathi. The goal is to
+                        create a waterless cleaning system that promotes environmental sustainability and
+                        cost-effectiveness in the solar energy sector.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Urgent Need for Water-Wise Solar Panel Cleaning Section -->
+        <section id="need" class="min-h-screen py-20 px-8 bg-white">
+            <div class="max-w-5xl mx-auto text-center animate-trigger" data-animation="animate__fadeInUp">
+                <h2 class="section-title text-center mb-8 text-3xl font-bold animate-trigger"
+                    data-animation="animate__fadeInDown">
+                    The Critical Importance of Water-Efficient Solar Panel Cleaning
+                </h2>
+                <p class="text-lg text-gray-700 mb-8 animate-trigger" data-animation="animate__fadeInRight">
+                    As the world shifts towards renewable energy, solar power has become essential. However, maintaining
+                    solar panels without efficient cleaning solutions risks performance loss due to dust. Traditional
+                    water-based cleaning methods waste precious resources, particularly in arid areas, making the need
+                    for waterless solutions critical.
+                </p>
+                <p class="text-lg text-gray-700 mb-8 animate-trigger" data-animation="animate__fadeInLeft">
+                    Manual cleaning methods are not only water-intensive but also laborious and risky, especially in
+                    large installations. Developing an efficient, waterless cleaning system is crucial to ensure both
+                    energy output and the long-term viability of solar power as a sustainable energy solution.
+                </p>
+                <div class="animate-trigger" data-animation="animate__zoomIn">
+                    <img src="p1.png" alt="Chart summarizing water usage and solar panel cleaning needs"
+                        class="mx-auto rounded-lg " />
+                </div>
+            </div>
+        </section>
+
+        <!-- A Greener Future for Solar Energy Section -->
+        <section id="future" class="min-h-screen py-20 px-8 bg-gray-50">
+            <div class="max-w-5xl mx-auto text-center animate-trigger" data-animation="animate__fadeInUp">
+                <h2 class="text-3xl font-bold section-title text-center mb-8 animate-trigger"
+                    data-animation="animate__fadeInDown">
+                    A Greener Future for Solar Energy
+                </h2>
+                <p class="text-lg text-gray-700 mb-8 animate-trigger" data-animation="animate__fadeInRight">
+                    This project’s focus on waterless cleaning directly addresses environmental challenges posed by
+                    traditional solar panel maintenance. By reducing water usage, our system plays a vital role in water
+                    conservation, especially crucial in regions facing water scarcity.
+                </p>
+                <p class="text-lg text-gray-700 mb-8 animate-trigger" data-animation="animate__fadeInLeft">
+                    Additionally, our solution enhances the efficiency of solar energy, contributing to higher energy
+                    outputs and promoting a greener, more sustainable future by lowering fossil fuel reliance and
+                    reducing carbon emissions.
+                </p>
+                <p class="text-lg text-gray-700 mb-8 animate-trigger" data-animation="animate__fadeInUp">
+                    Our commitment lies in fostering sustainable practices in solar energy, ensuring a minimal
+                    environmental footprint while advancing the global transition to cleaner, more efficient energy
+                    sources.
+                </p>
+            </div>
+        </section>
+
+        <!-- The Challenge of Solar Panel Maintenance Section -->
+        <section id="challenge" class="min-h-screen py-20 px-8 bg-white">
+            <div class="max-w-5xl mx-auto text-center animate-trigger" data-animation="animate__fadeInUp">
+                <h2 class="text-3xl font-bold section-title text-center mb-8 animate-trigger"
+                    data-animation="animate__fadeInDown">
+                    The Challenge of Solar Panel Maintenance
+                </h2>
+                <p class="text-lg text-gray-700 mb-8 animate-trigger" data-animation="animate__fadeInRight">
+                    Solar panel efficiency is affected by dust and debris buildup, which obstructs sunlight and reduces
+                    energy output. Traditional water-based cleaning methods face significant challenges:
+                </p>
+                <ul class="text-left space-y-4 text-lg text-gray-700 mb-8 animate-trigger"
+                    data-animation="animate__fadeInLeft">
+                    <li><strong>Water Scarcity:</strong> In arid and water-scarce regions, using water for cleaning is
+                        unsustainable and impractical.</li>
+                    <li><strong>Labor Intensive:</strong> Manual cleaning is laborious, costly, and complex, especially
+                        for large or inaccessible solar installations.</li>
+                    <li><strong>Time Consuming:</strong> Traditional methods require downtime, reducing energy
+                        production capacity.</li>
+                    <li><strong>Environmental Impact:</strong> Water use and cleaning agents can lead to environmental
+                        degradation and runoff concerns.</li>
+                </ul>
+                <div class="animate-trigger mb-8" data-animation="animate__zoomIn">
+                    <img src="p3.png" alt="Chart summarizing challenges of traditional solar panel maintenance"
+                        class="mx-auto w-1/2" />
+                </div>
+                <p class="text-lg text-gray-700 mb-8 animate-trigger" data-animation="animate__fadeInUp">
+                    Our project’s waterless solution aims to overcome these challenges by offering an efficient,
+                    sustainable, and cost-effective cleaning alternative, maximizing solar energy’s potential as a clean
+                    power source.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- Understanding the Needs: Customer and Manufacturer Insights Section -->
+<section id="insights" class="min-h-screen py-20 px-8 bg-gray-100">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Understanding the Needs: Customer and Manufacturer Insights
+        </h2>
+        
+        <!-- Interactive Customer Insights Grid -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-2xl font-semibold mb-4">Customer Survey</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong>Cleaning Frequency:</strong> Monthly to quarterly, with many cleaning only when efficiency drops.</li>
+                    <li><strong>Water Usage:</strong> High water dependency; significant interest in waterless alternatives.</li>
+                    <li><strong>Challenges:</strong> Accessibility and safety concerns for hard-to-reach areas.</li>
+                    <li><strong>Desired Features:</strong> Automation, compatibility, and efficient dirt removal.</li>
+                </ul>
+                 <!-- Visual Summary for Customer Insights -->
+        <div class="flex justify-center mb-12 animate-trigger" data-animation="animate__zoomIn">
+            <img src="p4.png" alt="Customer insights chart" class=" w-2/3 " />
+        </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-2xl font-semibold mb-4">Manufacturer Survey</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong>Maintenance Recommendations:</strong> Regular, gentle cleaning for longevity.</li>
+                    <li><strong>Common Issues:</strong> Reduced output due to soiling, risk of hot spots from uneven cleaning.</li>
+                    <li><strong>Environmental Factors:</strong> High soiling risk in arid, coastal, and urban areas.</li>
+                </ul>
+                <!-- Visual Summary for Manufacturer Insights -->
+        <div class="flex justify-center animate-trigger" data-animation="animate__zoomIn">
+            <img src="p5.png" alt="Manufacturer insights chart"/>
+        </div>
+            </div>
+        </div>
+
+       
+        
+        
+        
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInUp">
+            These insights guided our project’s design, ensuring our waterless cleaning solution addresses the real-world needs of the solar energy market.
+        </p>
+    </div>
+</section>
+
+<!-- Learning from the Experts: Seller Review and Findings Section -->
+<section id="seller-review" class="min-h-screen py-20 px-8 bg-white">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Learning from the Experts: Seller Review and Findings
+        </h2>
+        
+        <!-- Seller Review Insights Grid -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-2xl font-semibold mb-4">Key Insights from Seller Review</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong>Types of Cleaning Systems:</strong> Range from automated robotic cleaners to manual dry methods.</li>
+                    <li><strong>Effectiveness:</strong> Varying success in handling dust, dirt, and bird droppings.</li>
+                    <li><strong>Environmental Friendliness:</strong> Usage of eco-friendly agents considered.</li>
+                    <li><strong>Integration & Safety:</strong> Focus on ease of integration and essential safety features.</li>
+                    <li><strong>Maintenance Support:</strong> Information on post-installation support gathered.</li>
+                </ul>
+                <!-- Visual Summary for Seller Review Insights -->
+        <div class="flex justify-center mt-12 animate-trigger" data-animation="animate__zoomIn">
+            <img src="p6.png" alt="Seller review insights chart"  />
+        </div>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-2xl font-semibold mb-4">Key Findings</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li><strong>Smaller Installations:</strong> Limited recommendations for installations under 100kW due to costs.</li>
+                    <li><strong>Cleaning Frequency:</strong> Daily cleaning suggested to avoid 7% efficiency reduction over 10 days.</li>
+                    <li><strong>Bird Droppings:</strong> Dry systems often require multiple passes for thorough removal.</li>
+                    <li><strong>Agent Cautions:</strong> Caution advised against lubricants or soaps due to scratching risks.</li>
+                </ul>
+                <!-- Visual Summary for Key Findings -->
+        <div class="flex justify-center mt-20 animate-trigger" data-animation="animate__zoomIn">
+            <img src="p7.png" alt="Key findings chart" />
+        </div>
+        </div>
+            </div>
+        </div>
+
+        
+        
+        
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInUp">
+            This review process was invaluable in refining our design to ensure our waterless cleaning solution meets the practical and market-specific needs identified by industry experts.
+        </p>
+    </div>
+</section>
+
+
+<!-- Project Goals: A Multifaceted Approach Section -->
+<section id="goals" class="min-h-screen py-20 px-8 bg-gray-100">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Project Goals: A Multifaceted Approach
+        </h2>
+        
+        <!-- Project Goals Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Quality</h3>
+                <p class="text-gray-700">
+                    Ensure at least 95% cleaning efficiency, with durable, weather-resistant, and rust-proof materials for long-lasting performance.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Economical</h3>
+                <p class="text-gray-700">
+                    Develop a cost-effective system with minimal maintenance needs and reduced energy consumption.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Convenience</h3>
+                <p class="text-gray-700">
+                    Focus on ease of use with a switch-operated design and modularity for easy installation and upgrades.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Safety</h3>
+                <p class="text-gray-700">
+                    Prioritize safety with an emergency stop feature and risk minimization for users and panels.
+                </p>
+            </div>
+        </div>
+
+        <!-- Visual Summary for Project Goals -->
+        <div class="flex justify-center animate-trigger" data-animation="animate__zoomIn">
+            <img src="p8.png" alt="Project goals chart" class=" w-2/3 md:w-1/2" />
+        </div>
+        
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInUp">
+            These objectives guide our design process, ensuring the final product meets industry needs while promoting sustainability and user satisfaction.
+        </p>
+    </div>
+</section>
+
+<!-- Designing the Solution: CAD Model and Key Considerations Section -->
+<section id="design-solution" class="min-h-[200vh] py-20 px-8 bg-gray-50">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Designing the Solution: CAD Model and Key Considerations
+        </h2>
+
+        <!-- Key Considerations Grid - Part 1 -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Structural Integrity</h3>
+                <p class="text-gray-700">
+                    Frame dimensions balance stability and weight, optimizing cleaning time and strength. Using simulations, we confirmed a 50kg frame weight and support conditions to ensure stability.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Highly Customizable Components</h3>
+                <p class="text-gray-700">
+                    Our model is designed with modularity in mind, allowing for easy customization of components such as the actuator settings to meet specific cleaning requirements and operational conditions.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Material Selection</h3>
+                <p class="text-gray-700">
+                    Aluminum T-slot profile (3030) selected based on strength-to-weight ratio. Weighted matrix analysis ranked it best in strength, durability, and cost.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Tyre Selection and Integration</h3>
+                <p class="text-gray-700">
+                    Adjusted to a 30mm tire width to accommodate design constraints, ensuring clearance over solar panels and stability during operation.
+                </p>
+            </div>
+        </div>
+
+        <!-- CAD Images Placeholder -->
+        <div class="flex justify-center mb-12 animate-trigger" data-animation="animate__zoomIn">
+            <img src="cad-placeholder.png" alt="CAD Model Images from pages 64-67" class="rounded-lg shadow-lg w-full md:w-2/3 lg:w-1/2" />
+        </div>
+
+        <!-- Key Considerations Grid - Part 2 -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Motion System and Power Requirements</h3>
+                <p class="text-gray-700">
+                    Power needs calculated for 8.32 Watts, factoring in assembly weight, friction, and a target speed of 30 seconds per panel.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Additional Considerations</h3>
+                <p class="text-gray-700">
+                    Ongoing design refinements focus on improving system durability, ensuring ease of assembly, and enhancing operational safety.
+                </p>
+            </div>
+        </div>
+
+        <!-- Visual Summary Placeholder -->
+        <div class="flex justify-center animate-trigger" data-animation="animate__zoomIn">
+            <img src="p9.png" alt="Chart summarizing key design considerations" class="w-2/3 " />
+        </div>
+
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInUp">
+            Through these detailed considerations, our design achieves a practical, efficient, and sustainable approach to waterless solar panel cleaning.
+        </p>
+    </div>
+</section>
+
+<!-- Bringing the Design to Life: Geometric Modeling Section -->
+<section id="geometric-modeling" class="min-h-screen py-20 px-8 bg-white">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Bringing the Design to Life: Geometric Modeling
+        </h2>
+
+        <p class="text-lg text-gray-700 mb-8 text-center animate-trigger" data-animation="animate__fadeInRight">
+            During geometric modeling, detailed 3D representations of each component were created in CAD software, enabling precise visualization and refinement before manufacturing.
+        </p>
+
+        <!-- Modern Carousel for CAD Images -->
+        <div class="relative w-full max-w-sm mx-auto overflow-hidden rounded-lg shadow-lg animate-trigger" data-animation="animate__zoomIn">
+            <div class="slider-container flex transition-transform duration-10000 ease-linear animate-slider">
+            <div class="flex-shrink-0 w-48 h-48">
+                <img src="s1.png" alt="CAD Model - Frame" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-shrink-0 w-48 h-48">
+                <img src="s2.png" alt="CAD Model - Actuator Assembly" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-shrink-0 w-48 h-48">
+                <img src="s3.png" alt="CAD Model - Brush and Connector" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-shrink-0 w-48 h-48">
+                <img src="s4.png" alt="CAD Model - Motion Assembly" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-shrink-0 w-48 h-48">
+                <img src="s5.png" alt="CAD Model - Nozzle Assembly" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-shrink-0 w-48 h-48">
+                <img src="s6.png" alt="CAD Model - Other Parts" class="w-full h-full object-cover">
+            </div>
+            </div>
+        </div>
+
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInLeft">
+            This 3D modeling phase defined dimensions, materials, and assembly relationships, optimizing each part for seamless integration and robust performance.
+        </p>
+    </div>
+</section>
+
+<!-- Ensuring Performance: Engineering Analysis and Simulation Section -->
+<section id="engineering-analysis" class="min-h-screen py-20 px-8 bg-gray-100">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Ensuring Performance: Engineering Analysis and Simulation
+        </h2>
+
+        <!-- Analysis Cards Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Thermal Analysis</h3>
+                <p class="text-gray-700">
+                    Simulated heat transfer to identify potential hot spots and optimize material choices, ensuring thermal stability.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Modal Analysis</h3>
+                <p class="text-gray-700">
+                    Analyzed natural frequencies to prevent resonance and maintain structural stability during operation.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Static Analysis</h3>
+                <p class="text-gray-700">
+                    Tested stress, strain, and factor of safety under 50N and 100N loads to confirm structural integrity.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Dynamic Analysis</h3>
+                <p class="text-gray-700">
+                    Evaluated dynamic behavior with 3mm contact area to ensure performance under operational forces and friction.
+                </p>
+            </div>
+        </div>
+
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInUp">
+            These engineering analyses enabled precise design refinements, ensuring robust performance, structural integrity, and operational stability.
+        </p>
+    </div>
+</section>
+<!-- Refining the Form: Geometric Design Section -->
+<section id="geometric-design" class="min-h-screen py-20 px-8 bg-white">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Refining the Form: Geometric Design
+        </h2>
+
+        <p class="text-lg text-gray-700 mb-8 text-center animate-trigger" data-animation="animate__fadeInRight">
+            In the geometric design phase, we optimized component dimensions and placement for seamless integration and high performance.
+        </p>
+
+        <!-- Dynamic Image Slider for CAD Designs -->
+        <!-- <div class="relative w-full max-w-3xl mx-auto overflow-hidden rounded-lg shadow-lg animate-trigger" data-animation="animate__zoomIn">
+            <div class="slider-container flex transition-transform duration-15000 ease-linear animate-slider">
+                <div class="w-full flex-shrink-0">
+                    <img src="design1.png" alt="CAD Model - Frame" class="w-full object-cover">
+                    <p class="text-center text-gray-600 mt-2">Frame Design</p>
+                </div>
+                <div class="w-full flex-shrink-0">
+                    <img src="design2.png" alt="CAD Model - Actuator Assembly" class="w-full object-cover">
+                    <p class="text-center text-gray-600 mt-2">Actuator Assembly</p>
+                </div>
+                <div class="w-full flex-shrink-0">
+                    <img src="design3.png" alt="CAD Model - Motion Assembly" class="w-full object-cover">
+                    <p class="text-center text-gray-600 mt-2">Motion Assembly</p>
+                </div>
+                <div class="w-full flex-shrink-0">
+                    <img src="design4.png" alt="CAD Model - Brush Design" class="w-full object-cover">
+                    <p class="text-center text-gray-600 mt-2">Brush Design</p>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="grid md:grid-cols-2 gap-8 mt-12">
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Frame Dimensions</h3>
+                <p class="text-gray-700">
+                    Sized to standard solar panels, maximizing coverage while maintaining structural integrity.
+                </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Ultrasonic Sensors and Debris Detection Module</h3>
+                <p class="text-gray-700">
+                    Ultrasonic sensors ensure safe operation by detecting obstacles, while the debris detection module focuses cleaning on heavily soiled areas.
+                </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Brush Design</h3>
+                <p class="text-gray-700">
+                    Tailored for debris removal and fully compatible with actuator movements for thorough cleaning.
+                </p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Tire Size and Placement</h3>
+                <p class="text-gray-700">
+                    Sized for stability, ensuring smooth traversal across the solar panel surface without interference.
+                </p>
+            </div>
+        </div>
+
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInUp">
+            This careful design process produced a well-integrated, high-performance solution optimized for waterless cleaning.
+        </p>
+    </div>
+</section>
+<!-- Choosing the Right Materials Section -->
+<section id="material-selection" class="min-h-screen py-20 px-8 bg-gray-100">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Choosing the Right Materials
+        </h2>
+
+        <p class="text-lg text-gray-700 mb-8 text-center animate-trigger" data-animation="animate__fadeInRight">
+            Material selection was essential to achieving a balance of strength, weight, durability, and cost-effectiveness. Aluminum was chosen for the main frame due to its lightweight nature, high strength-to-weight ratio, and corrosion resistance.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInLeft">
+                <h3 class="text-xl font-semibold mb-4">Aluminum Frame</h3>
+                <p class="text-gray-700">
+                    Selected for its light weight and high durability, ensuring the system remains easy to maneuver and resistant to corrosion over time.
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg animate-trigger" data-animation="animate__fadeInRight">
+                <h3 class="text-xl font-semibold mb-4">Standard Components</h3>
+                <p class="text-gray-700">
+                    Commonly available components were prioritized to reduce manufacturing complexity and cost, making the system both efficient and economically viable.
+                </p>
+            </div>
+        </div>
+
+        <!-- Visual Summary for Material Selection -->
+        <div class="flex justify-center animate-trigger" data-animation="animate__zoomIn">
+            <img src="p10.png" alt="Material selection chart" class=" md:w-2/3" />
+        </div>
+
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInUp">
+            This approach to material selection ensures that our cleaning system is durable, efficient, and suited to the demands of waterless solar panel maintenance.
+        </p>
+    </div>
+</section>
+<!-- Component Selection and Sourcing Section -->
+<section id="component-selection" class="min-h-screen py-20 px-8 bg-white">
+    <div class="max-w-6xl mx-auto animate-trigger" data-animation="animate__fadeInUp">
+        <h2 class="text-3xl font-bold section-title text-center mb-12 animate-trigger" data-animation="animate__fadeInDown">
+            Component Selection and Sourcing
+        </h2>
+
+        <!-- List of Components with Descriptions in Timeline Style -->
+        <div class="relative">
+            <div class="border-l-4 border-blue-500 absolute h-full left-1/2 transform -translate-x-1/2"></div>
+
+            <!-- Aluminum T-Profile -->
+            <div class="flex items-center justify-between mb-8 animate-trigger" data-animation="animate__fadeInRight">
+                <div class="w-5/12 text-right pr-8">
+                    <h3 class="text-xl font-semibold">Aluminum T-Profile (3030)</h3>
+                    <p class="text-gray-700">Chosen for the main structure for its strength, availability, and ease of assembly.</p>
+                </div>
+                <div class="w-5 h-5 bg-blue-500 rounded-full"></div>
+            </div>
+
+            <!-- Linear Actuator & Servo Motor -->
+            <div class="flex items-center justify-between mb-8 animate-trigger" data-animation="animate__fadeInLeft">
+                <div class="w-5 h-5 bg-blue-500 rounded-full"></div>
+                <div class="w-5/12 pl-8">
+                    <h3 class="text-xl font-semibold">Stepper Gear Motor</h3>
+                    <p class="text-gray-700">These drive the cleaning mechanism, providing control and precision for effective cleaning.</p>
+                </div>
+            </div>
+
+            <!-- Arduino UNO Microcontroller -->
+            <div class="flex items-center justify-between mb-8 animate-trigger" data-animation="animate__fadeInRight">
+                <div class="w-5/12 text-right pr-8">
+                    <h3 class="text-xl font-semibold">Arduino UNO Microcontroller</h3>
+                    <p class="text-gray-700">Controls and coordinates system components for smooth, synchronized operation.</p>
+                </div>
+                <div class="w-5 h-5 bg-blue-500 rounded-full"></div>
+            </div>
+
+            <!-- ESP32 Camera Module -->
+            <div class="flex items-center justify-between mb-8 animate-trigger" data-animation="animate__fadeInLeft">
+                <div class="w-5 h-5 bg-blue-500 rounded-full"></div>
+                <div class="w-5/12 pl-8">
+                    <h3 class="text-xl font-semibold">ESP32 Camera Module</h3>
+                    <p class="text-gray-700">Offers high-resolution, wide-angle images for accurate dirt and debris detection.</p>
+                </div>
+            </div>
+
+            <!-- Ultrasonic Sensors -->
+            <div class="flex items-center justify-between mb-8 animate-trigger" data-animation="animate__fadeInRight">
+                <div class="w-5/12 text-right pr-8">
+                    <h3 class="text-xl font-semibold">Ultrasonic Sensors</h3>
+                    <p class="text-gray-700">Ensure safe operation on sloped panels by detecting fall risks.</p>
+                </div>
+                <div class="w-5 h-5 bg-blue-500 rounded-full"></div>
+            </div>
+
+            <!-- Low-Duty Pump -->
+            <div class="flex items-center justify-between mb-8 animate-trigger" data-animation="animate__fadeInLeft">
+                <div class="w-5 h-5 bg-blue-500 rounded-full"></div>
+                <div class="w-5/12 pl-8">
+                    <h3 class="text-xl font-semibold">Rotating Cylindrical Brush</h3>
+                    <p class="text-gray-700">Utilized for effective cleaning, ensuring thorough removal of dust and debris from the solar panels.</p>
+                </div>
+            </div>
+
+            <!-- Standard M8 Nuts, Bolts, and Tires -->
+            <div class="flex items-center justify-between animate-trigger" data-animation="animate__fadeInRight">
+                <div class="w-5/12 text-right pr-8">
+                    <h3 class="text-xl font-semibold">Standard M8 Nuts, Bolts, and Tires</h3>
+                    <p class="text-gray-700">Common components chosen for availability, simplifying maintenance and assembly.</p>
+                </div>
+                <div class="w-5 h-5 bg-blue-500 rounded-full"></div>
+            </div>
+        </div>
+
+        <p class="text-lg text-gray-700 mt-12 text-center animate-trigger" data-animation="animate__fadeInUp">
+            This meticulous component selection process ensures an efficient, reliable, and cost-effective design for waterless solar panel cleaning.
+        </p>
+    </div>
+</section>
+
+    </main>
+
+    <script>
+        // Sidebar Toggle
+        const sidebar = document.querySelector('.sidebar');
+        const openButton = document.getElementById('open-sidebar');
+        const closeButton = document.getElementById('close-sidebar');
+
+        openButton.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
+
+        closeButton.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+
+        // Accordion Functionality
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            const button = item.querySelector('button');
+            button.addEventListener('click', () => {
+                const isActive = item.classList.contains('accordion-active');
+
+                // Close all accordion items
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    otherItem.classList.remove('accordion-active');
+                    otherItem.querySelector('svg').style.transform = 'rotate(0deg)';
+                });
+
+                // Toggle clicked item
+                if (!isActive) {
+                    item.classList.add('accordion-active');
+                    item.querySelector('svg').style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // Smooth Scroll for In-Page Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close sidebar on mobile after clicking
+                if (window.innerWidth < 768) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+
+        // Intersection Observer for Scroll Animations
+        document.addEventListener("DOMContentLoaded", function () {
+            const observerOptions = {
+                root: null,          // Use viewport as root
+                rootMargin: "0px",   // Trigger as soon as element is visible
+                threshold: 0.1       // Trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible"); // Add visible class to trigger animation
+                        observer.unobserve(entry.target); // Stop observing once animation triggers
+                    }
+                });
+            }, observerOptions);
+
+            // Apply observer to each .fade-in element
+            document.querySelectorAll(".fade-in").forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        // Get the specified animation from data-animation attribute
+                        const animation = element.getAttribute('data-animation');
+                        // Add animate.css classes and the specified animation
+                        element.classList.add('animate__animated', animation);
+                        // Stop observing the element once animation is triggered
+                        observer.unobserve(element);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe each element with .animate-trigger class
+            document.querySelectorAll(".animate-trigger").forEach(element => {
+                observer.observe(element);
+            });
+        });
+        // Accordion Toggle Functionality
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            const button = item.querySelector('button');
+            button.addEventListener('click', () => {
+                const isActive = item.classList.contains('accordion-active');
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    otherItem.classList.remove('accordion-active');
+                    otherItem.querySelector('svg').style.transform = 'rotate(0deg)';
+                });
+                if (!isActive) {
+                    item.classList.add('accordion-active');
+                    item.querySelector('svg').style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
